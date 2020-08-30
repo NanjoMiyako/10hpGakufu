@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=yes">
+<title>10hpGakufu</title>
+<link rel="stylesheet" href="style2.css">
+</head>
+<body>
+<script src="jquery-3.3.1.min.js"></script>
+
+
+<form id="form1" name="form1">
+<select name="tabPages" style="font-size:20px; border:1px solid;">
+	<option value="tab_GakufuSakusei">楽譜作成</option>
+	<option value="tab_DataImport">楽譜データ読み込み</option>
+</select>
+<button type="button" id="selectTabPage1", style="margin-left:10px;" onclick="ChangeTab()">タブを選択</button>
+</form>
+
+<!-- 楽譜作成 -->
+<div id="tab_GakufuSakusei" class="tab">
+楽譜作成<br>
+今まで作成した楽譜<br>
+現在の段:<br>
+<div id="CurrentLine"></div>
+
+<div class="kugiri"></div>
+<div class="myBtn" onclick="addOneSpit()">1</div>
+<div class="myBtn">2</div>
+<div class="myBtn">3</div>
+<div class="myBtn">4</div>
+<div class="myBtn">5</div>
+<div class="myBtn">6</div>
+<div class="myBtn">7</div>
+<div class="myBtn">8</div>
+<div class="myBtn">9</div>
+<div class="myBtn">10</div>
+<br>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn" onclick="addOneSuck()">①</div>
+<div class="myBtn">②</div>
+<div class="myBtn">③</div>
+<div class="myBtn">④</div>
+<div class="myBtn">⑤</div>
+<div class="myBtn">⑥</div>
+<div class="myBtn">⑦</div>
+<div class="myBtn">⑧</div>
+<div class="myBtn">⑨</div>
+<div class="myBtn">⑩</div>
+<br>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn2">ベンド0.5</div>
+<div class="myBtn2">ベンド1.0</div>
+<div class="myBtn2">ベンド1.5</div>
+<div class="myBtn2">ベンド解除</div>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn2">現在の行を登録</div>
+
+</div>
+
+<div id="tab_DataImport" class="tab">
+楽譜データ読み込み<br>
+<span id="ImportDataFlgOnDataImportTab"></span><br>
+インポートファイルを選択:<br>
+<input type="file" id="fileOnDataImportTab"><br>
+<button type="button" id="ImportDataOnDataImportTab" style="margin-top:10px;" onclick="ImportDataOnDataImportTab()">
+楽譜データををインポート
+</button><br>
+</div>
+
+
+
+<script type="text/javascript" src="10hpGakufuJS.js">
+</script>
+
+
+</body>
+</html>

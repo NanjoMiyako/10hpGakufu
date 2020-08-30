@@ -1,0 +1,47 @@
+div{
+ /* ボックス表示用 */
+ /* border: solid 3px red; */
+ border: none;
+ box-sizing: border-box;
+
+ }
+ 
+.adbox1{
+ width: 950px;
+ height:300px;
+ border-color: black;
+}
+
+.kugiri{
+  clear: both;
+}
+
+.myBtn{
+  float: left;
+  color: #000;
+  background-color: #fff;
+  border: solid;
+  font-size: 30px;
+  text-align: center;
+  margin: 10px 10px;
+  width: 100px;
+  height: 50px;
+}
+
+.myBtn2{
+  float: left;
+  color: #000;
+  background-color: #fff;
+  border: solid;
+  font-size: 20px;
+  text-align: center;
+  margin: 10px 10px;
+  width: 200px;
+  height: 50px;
+}
+
+.myBtn3{
+ float: left
+ color: #000;
+ background-color: #fff;
+}
