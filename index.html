@@ -10,137 +10,188 @@
 <script src="jquery-3.3.1.min.js"></script>
 
 
+<!--
 <form id="form1" name="form1">
 <select name="tabPages" style="font-size:20px; border:1px solid;">
-	<option value="tab_RyoriTyusyutu">ランダム料理抽出</option>
-	<option value="tab_DataImport">データインポート</option>
+	<option value="tab_GakufuSakusei">楽譜作成</option>
+	<option value="tab_DataImport">楽譜データ読み込み</option>
 </select>
 <button type="button" id="selectTabPage1", style="margin-left:10px;" onclick="ChangeTab()">タブを選択</button>
 </form>
+-->
 
-<!-- ランダム料理抽出 -->
-<div id="tab_RyoriTyusyutu" class="tab">
-<form id="SearchForm">
-ランダム料理抽出<br>
-主要材料1:
-<input type:"text" id="Zairyo1OnRyoriTyusyutuTab" style="margin-left:10px;">
-<button type="button" id="Zairyo1TuikaBtnOnRyoriTyusyutuTab" onclick="ZairyoTuikaOnRyoriTyusyutuTab(1)">
-材料追加
-</button>
-<br>
-主要材料2:
-<input type:"text" id="Zairyo2OnRyoriTyusyutuTab" style="margin-left:10px;">
-<button type="button" id="Zairyo2TuikaBtnOnRyoriTyusyutuTab" onclick="ZairyoTuikaOnRyoriTyusyutuTab(2)">
-材料追加
-</button>
-<br>
-主要材料3:
-<input type:"text" id="Zairyo3OnRyoriTyusyutuTab" style="margin-left:10px;">
-<button type="button" id="Zairyo3TuikaBtnOnRyoriTyusyutuTab" onclick="ZairyoTuikaOnRyoriTyusyutuTab(3)">
-材料追加
-</button><br>
-主要材料4:
-<input type:"text" id="Zairyo4OnRyoriTyusyutuTab" style="margin-left:10px;">
-<button type="button" id="Zairyo3TuikaBtnOnRyoriTyusyutuTab" onclick="ZairyoTuikaOnRyoriTyusyutuTab(4)">
-材料追加
-</button><br>
-主要材料5:
-<input type:"text" id="Zairyo5OnRyoriTyusyutuTab" style="margin-left:10px;">
-<button type="button" id="Zairyo3TuikaBtnOnRyoriTyusyutuTab" onclick="ZairyoTuikaOnRyoriTyusyutuTab(5)">
-材料追加
-</button>
-<br>
-キーワード:
-<input type:"text" id="KeyWordOnRyoriTyusyutuTab" style="margin-left:10px;"><br>
-
-<button type="button" id="TyusyutuBtnOnRyoriTyusyutuTab" value="3" onclick="RyoriTyusyutuOnRyoriTyusyutuTab()">
-ランダム料理決定
-</button>
-<hr>
-ヒット件数:<span id="HitCountOnRyoriTyusyutuTab"></span><br>
-<div id="RyoriDivOnTyusyutuBtnOnRyoriTyusyutuTab">
-</div>
-
-</form>
-</div>
-
-<div id="tab_DataImport" class="tab">
-データインポート<br>
+<!-- 楽譜作成 -->
+<div id="tab_GakufuSakusei" class="tab">
+楽譜データ読み込み<br>
 <span id="ImportDataFlgOnDataImportTab"></span><br>
 インポートファイルを選択:<br>
 <input type="file" id="fileOnDataImportTab"><br>
 <button type="button" id="ImportDataOnDataImportTab" style="margin-top:10px;" onclick="ImportDataOnDataImportTab()">
-材料-料理データをインポート
+楽譜データををインポート
 </button><br>
+<hr>
+楽譜作成<br>
+今まで作成した楽譜<br>
+<div id="prevLines"></div>
+<br>
+<hr>
+現在の段:<br>
+<div id="CurrentLine"></div>
+
+<div class="kugiri"></div>
+tempo=<input type="text" id="TempoTextBox" value="100"><br>
+<button onclick="setTempo()">テンポを設定</button>
+<hr>
+
+<div class="kugiri"></div>
+行番号=<input type="text" id="CpyLineNumTextBox" value=""><br>
+<button onclick="CpyLineNum()">行をコピー</button>
+<hr>
+
+<div class="kugiri"></div>
+<div class="myBtn" onclick="addOneSpit()">1</div>
+<div class="myBtn" onclick="addTwoSpit()">2</div>
+<div class="myBtn" onclick="addThreeSpit()">3</div>
+<div class="myBtn" onclick="addFourSpit()">4</div>
+<div class="myBtn" onclick="addFiveSpit()">5</div>
+<div class="myBtn" onclick="addSixSpit()">6</div>
+<div class="myBtn" onclick="addSevenSpit()">7</div>
+<div class="myBtn" onclick="addEightSpit()">8</div>
+<div class="myBtn" onclick="addNineSpit()">9</div>
+<div class="myBtn" onclick="addTenSpit()">10</div>
+<br>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn" onclick="addOneSuck()">①</div>
+<div class="myBtn" onclick="addTwoSuck()">②</div>
+<div class="myBtn" onclick="addThreeSuck()">③</div>
+<div class="myBtn" onclick="addFourSuck()">④</div>
+<div class="myBtn" onclick="addFiveSuck()">⑤</div>
+<div class="myBtn" onclick="addSixSuck()">⑥</div>
+<div class="myBtn" onclick="addSevenSuck()">⑦</div>
+<div class="myBtn" onclick="addEightSuck()">⑧</div>
+<div class="myBtn" onclick="addNineSuck()">⑨</div>
+<div class="myBtn" onclick="addTenSuck()">⑩</div>
+<br>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn2" onclick="setBend(0.5)">ベンド0.5</div>
+<div class="myBtn2" onclick="setBend(1.0)">ベンド1.0</div>
+<div class="myBtn2" onclick="setBend(1.5)">ベンド1.5</div>
+<div class="myBtn2" onclick="setBend(0.0)">ベンド解除</div>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn2" onclick="addKyufu(0)">全休符</div>
+<div class="myBtn2" onclick="addKyufu(2)">2分休符</div>
+<div class="myBtn2" onclick="addKyufu(4)">4分休符</div>
+<div class="myBtn2" onclick="addKyufu(8)">8分休符</div>
+<div class="myBtn2" onclick="addKyufu(16)">16分休符</div>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn2" onclick="addExtend()">伸ばす記号追加</div>
+<div class="myBtn2" onclick="clrExtend()">伸ばす記号クリア</div>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn3" onclick="DelCrOnpu()">現在の音符(末尾)を削除</div>
+<div class="kugiri"></div>
+
+<div class="myBtn2" onclick="RegistCurrentLine()">現在の行を登録</div>
+<div class="kugiri"></div>
+
+<div class="myBtn2" onclick="DelEndLine()">末尾の行を削除</div>
+<div class="kugiri"></div>
+<hr>
+
+<div class="myBtn3" onclick="OutputFile()">現在の楽譜データをファイル出力</div>
+<div class="kugiri"></div>
 </div>
 
-<div id="tab_ZairyoSentaku" class="tab">
-材料選択
-<div id="categoryTab1"></div><br>
-<div id="zairyoTab1"></div><br>
-<button type="button" id="SentakuOnZairyoSentakuTab" style="width:100px; height:50px;" onclick="ZairyoSentaku()">
-選択
-</button>
-</div>
+
 
 
 <script>
-const TAB_RYORI_TYUSYUTU = "tab_RyoriTyusyutu"
-const TAB_DATA_I = "tab_DataImport"
-const TAB_ZAIRYO_SENTAKU = "tab_ZairyoSentaku"
 
-var AllTabNameList = [
-TAB_RYORI_TYUSYUTU,
-TAB_DATA_I,
-TAB_ZAIRYO_SENTAKU
-];
 
-var g_RyoriAndZairyo;
-
-var g_ZairyoCategoryList = [];
-var Cr_ZairyoCategory = "";
-var Cr_ZairyoMei = "";
-var DataImportFlg = false;
-
-var g_SyuyouZairyo1 = "";
-var g_SyuyouZairyo2 = "";
-var g_SyuyouZairyo3 = "";
-var g_SyuyouZairyo4 = "";
-var g_SyuyouZairyo5 = "";
-var g_SyuyouZairyoTuikaNumber = "";
-
-InitTab();
 Init();
+
+var totalLines = [];
+var CurrentLine = [];
+var CurrentBend = [];
+var CurrentExtend = [];
+var CurrentIdx = 0;
+var LineCount = 0;
+var Tempo = 100;
 
 function InitTab(){
 	HiddenAllTab();
-	DisplayTab(TAB_DATA_I);
+	DisplayTab(TAB_GAKUFU_SAKUSEI);
 }
 
 function Init(){
-}
-
-function ChangeTab(){
-	HiddenAllTab();
+	totalLines = [];
+	CurrentLine = [];
+	CurrentBend = [];
+	CurrentExtend = [];
+	CurrentIdx = 0;
+	LineCount = 0;
+	Tempo = 100;
 	
-	//選択されたタブを取得
-	var form1 = document.getElementById("form1");
-	var selectedTabIdx = form1.tabPages.selectedIndex;
-	var selectedTabNm = form1.tabPages.options[selectedTabIdx].value;
-
-	DisplayTab(selectedTabNm);
+	printAllPrevLines();
 }
 
-//指定したタブを表示
+function DisplayGakufuSakuseiTab(){
+}
+
+function DisplayDataImportTab(){
+}
+
+function CpyLineNum(){
+	var lineNumElem = document.getElementById("CpyLineNumTextBox");
+	var lineNumStr;
+	if(isNaN(lineNumElem.value) || LineCount < lineNumElem.value){
+		return;
+	}else{
+		lineNumStr = "s"
+		lineNumStr += parseInt(lineNumElem.value);
+
+		CurrentLine.push(lineNumStr);
+		CurrentBend.push(0.0);
+		CurrentExtend.push(0);
+		CurrentIdx++;
+
+		RegistCurrentLine();
+		ClearCurrentLine();
+		
+		
+	}
+	
+	printAllPrevLines();
+}
+
+function setTempo(){
+	var tempoElem = document.getElementById("TempoTextBox");
+	if(isNaN(tempoElem.value)){
+		Tempo=100;
+		tempoElem.value = "100";
+	}else{
+		Tempo = parseInt(tempoElem.value);
+	}
+	
+	printAllPrevLines();
+	
+}
 function DisplayTab(tabNm){
 
 	//タブごとの各種表示用処理
-	if(tabNm == TAB_RYORI_TYUSYUTU){
-		DisplayRyoriTyusyutuTab();
+	if(tabNm == TAB_GAKUFU_SAKUSEI){
+		DisplayGakufuSakuseiTab();
 	}else if(tabNm == TAB_DATA_I){
 		DisplayDataImportTab();
-	}else if(tabNm == TAB_ZAIRYO_SENTAKU){
-		DisplayZairyoSeitakuTab();
 	}
 
 	var tabElem1 = document.getElementById(tabNm);
@@ -157,258 +208,542 @@ function HiddenAllTab(){
 	
 }
 
-function ZairyoTuikaOnRyoriTyusyutuTab(value){
-	if(value == 1){
-		g_SyuyouZairyoTuikaNumber = 1;
-	}else if(value == 2){
-		g_SyuyouZairyoTuikaNumber = 2;
-	}else if(value == 3){
-		g_SyuyouZairyoTuikaNumber = 3;
-	}else if(value == 4){
-		g_SyuyouZairyoTuikaNumber = 4;
-	}else if(value == 5){
-		g_SyuyouZairyoTuikaNumber = 5;
-	}
-	
+function ChangeTab(){
 	HiddenAllTab();
-	DisplayTab(TAB_ZAIRYO_SENTAKU);
+	
+	//選択されたタブを取得
+	var form1 = document.getElementById("form1");
+	var selectedTabIdx = form1.tabPages.selectedIndex;
+	var selectedTabNm = form1.tabPages.options[selectedTabIdx].value;
+
+	DisplayTab(selectedTabNm);
 }
 
-function DisplayRyoriTyusyutuTab(){
-}
-function DisplayDataImportTab(){
-	var spanElem;
-	
-	spanElem = document.getElementById("ImportDataFlgOnDataImportTab");
-	if(DataImportFlg == true){
-		spanElem.innerHTML = "材料-料理データ：インポート済み"
-	}else{
-		spanElem.innerHTML = "材料-料理データ：インポート未完了"
+function printAllPrevLines(){
+	var prevLineDiv = document.getElementById("prevLines");
+	//クリア
+	while(prevLineDiv.firstChild != null){ prevLineDiv.removeChild(prevLineDiv.firstChild); }
+
+	//Tempoの行出力
+	divElem = document.createElement('div');
+	divElem.innerHTML = "Tempo=";
+	divElem.innerHTML += Tempo;
+	prevLineDiv.appendChild(divElem);
+
+
+	for(var i=0; i<totalLines.length; i++){
+		divElem = document.createElement('div');
+		divElem.innerHTML = (i+1);
+		divElem.innerHTML += " : ";
+		divElem.innerHTML += totalLines[i];
+		prevLineDiv.appendChild(divElem);
 	}
+	
 }
-function DisplayZairyoSeitakuTab(){
-	var spanElem;
-	var divElem;
-	var brElem;
-	var zairyoMeiTopMargin = 0;
-	var str1;
+function ClearCurrentLine(){
+	CurrentLine = [];
+	CurrentBend = [];
+	CurrentExtend = [];
+	CurrentIdx = 0;
 	
-	divElem = document.getElementById("categoryTab1");
-	divElem.style.backgroundColor = "rgb(100, 255, 100)";
-	divElem.style.width = "500px";
-	divElem.style.margin = "20px 5px";
-	//カテゴリーのDivをクリア
-	while(divElem.firstChild != null){ divElem.removeChild(divElem.firstChild); }
+}
+function RegistCurrentLine(){
+	totalLines.push(MakeCurrentLineStr());
+	ClearCurrentLine();
+	LineCount++;
 	
-	for(var i=0; i<g_ZairyoCategoryList.length; i++){
-		spanElem = document.createElement("span");
-		spanElem.innerHTML = "　";
-		spanElem.innerHTML += g_ZairyoCategoryList[i];
-		spanElem.innerHTML += "　";
-		if(g_ZairyoCategoryList[i] == Cr_ZairyoCategory){
-			spanElem.style.border = "thick solid rgb(255, 0, 0)";
-			spanElem.style.color = "red";
-		}else{
-			spanElem.style.border = "thick solid rgb(0, 0, 0)";
-			spanElem.style.color = "black";
-		}
-		spanElem.style.fontWeight = "bold";
-		spanElem.style.margin = "20px 5px";
-		spanElem.value = g_ZairyoCategoryList[i];
-		spanElem.onclick = function(){
-			//alert(this.value);
-			Cr_ZairyoCategory = this.value;
-			Cr_ZairyoMei = "";
-			DisplayZairyoSeitakuTab();
+	printAllPrevLines();
+	DisplayCurrentLine();
+
+}
+
+function MakeCurrentLineStr(){
+	var printStr = "";
+	
+	for(var i=0; i<CurrentLine.length; i++){
+		if(printStr != ""){
+			printStr += ", ";
 		}
 		
-		divElem.appendChild(spanElem);
-		
-		if( ((i+1) % 3) == 0){
-			brElem = document.createElement("br");
-			divElem.appendChild(brElem);
+		if(!isNaN(CurrentLine[i])){
+			if(parseInt(CurrentLine[i]) >= 1){
+				printStr += CurrentLine[i];
+			}else{
+				printStr += getCorrespondStr(CurrentLine[i]);
+			}
+			if(CurrentBend[i] != 0){
+				printStr += "↓";
+				printStr += "(";
+				if(CurrentBend[i] != 1.0){
+					printStr += CurrentBend[i];
+				}else{
+					printStr += "1.0";
+				}
+				printStr += ")";
+			}
+		}else if(CurrentLine[i].slice(0,1) == "s"){
+			printStr += "*";
+			printStr += CurrentLine[i].slice(1);
 			
-			brElem = document.createElement("br");
-			divElem.appendChild(brElem);
-		}
-	}
-	
-	divElem = document.getElementById("zairyoTab1");
-	divElem.style.backgroundColor = "rgb(100, 100, 255)";
-	divElem.style.width = "800px";
-	divElem.style.margin = "20px 5px";
-	//材料名のDivをクリア
-	while(divElem.firstChild != null){ divElem.removeChild(divElem.firstChild); }
-	var zairyoList = GetZairyoList(Cr_ZairyoCategory);
-
-	var zairyoMeiList = [];
-	for(var k=0; k<zairyoList.length; k++){
-		zairyoMeiList.push(zairyoList[k].zairyoMei);
-	}
-	zairyoMeiList.sort();
-	
-	for(var j=0; j<zairyoMeiList.length; j++){
-		spanElem = document.createElement("span");
-		spanElem.innerHTML = "　";
-		spanElem.innerHTML += zairyoMeiList[j];
-		spanElem.innerHTML += "　";
-		if(zairyoMeiList[j] == Cr_ZairyoMei){
-			spanElem.style.border = "thick solid rgb(255, 0, 0)";
-			spanElem.style.color = "red";
 		}else{
-			spanElem.style.border = "thick solid rgb(0, 0, 0)";
-			spanElem.style.color = "black";
+			printStr += CurrentLine[i];
 		}
-		spanElem.style.fontWeight = "bold";
-		spanElem.style.margin = "20px 5px";
-		spanElem.value = zairyoMeiList[j];
-		spanElem.onclick = function(){
-			Cr_ZairyoMei = this.value;
-			DisplayZairyoSeitakuTab();
-		}
-		divElem.appendChild(spanElem);
 		
-		if( ((j+1) % 5) == 0){
-			brElem = document.createElement("br");
-			divElem.appendChild(brElem);
+		if(CurrentExtend[i] != 0){
+			for(var j=0; j<CurrentExtend[i]; j++){
+				printStr += "+";
+			}
+		}
+	}
+	
+	return printStr;
+
+}
+function DisplayCurrentLine(){
+	var printStr = MakeCurrentLineStr();
+	var crLineElem = document.getElementById("CurrentLine");
+	
+	crLineElem.innerHTML = printStr;
+}
+
+function getCorrespondStr(val){
+	val2 = parseInt(val);
+	
+	if(val2 == -1){
+		return "①"
+	}else if(val2 == -2){
+		return "②"
+	}else if(val2 == -3){
+		return "③"
+	}else if(val2 == -4){
+		return "④"
+	}else if(val2 == -5){
+		return "⑤"
+	}else if(val2 == -6){
+		return "⑥"
+	}else if(val2 == -7){
+		return "⑦"
+	}else if(val2 == -8){
+		return "⑧"
+	}else if(val2 == -9){
+		return "⑨"
+	}else if(val2 == -10){
+		return "⑩"
+	}
+	
+}
+function addOneSpit(){
+	CurrentLine.push("1");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+
+	DisplayCurrentLine();
+}
+
+function addOneSuck(){
+	CurrentLine.push("-1");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+	
+	DisplayCurrentLine();
+}
+
+function addTwoSpit(){
+	CurrentLine.push("2");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+
+	DisplayCurrentLine();
+}
+
+function addTwoSuck(){
+	CurrentLine.push("-2");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+	
+	DisplayCurrentLine();
+}
+function addThreeSpit(){
+	CurrentLine.push("3");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+
+	DisplayCurrentLine();
+}
+
+function addThreeSuck(){
+	CurrentLine.push("-3");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+	
+	DisplayCurrentLine();
+}
+
+function addFourSpit(){
+	CurrentLine.push("4");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+
+	DisplayCurrentLine();
+}
+
+function addFourSuck(){
+	CurrentLine.push("-4");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+	
+	DisplayCurrentLine();
+}
+
+function addFiveSpit(){
+	CurrentLine.push("5");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+
+	DisplayCurrentLine();
+}
+
+function addFiveSuck(){
+	CurrentLine.push("-5");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+	
+	DisplayCurrentLine();
+}
+
+function addSixSpit(){
+	CurrentLine.push("6");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+
+	DisplayCurrentLine();
+}
+
+function addSixSuck(){
+	CurrentLine.push("-6");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+	
+	DisplayCurrentLine();
+}
+
+function addSevenSpit(){
+	CurrentLine.push("7");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+
+	DisplayCurrentLine();
+}
+
+function addSevenSuck(){
+	CurrentLine.push("-7");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+	
+	DisplayCurrentLine();
+}
+
+function addEightSpit(){
+	CurrentLine.push("8");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+
+	DisplayCurrentLine();
+}
+
+function addEightSuck(){
+	CurrentLine.push("-8");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+	
+	DisplayCurrentLine();
+}
+
+function addNineSpit(){
+	CurrentLine.push("9");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+
+	DisplayCurrentLine();
+}
+
+function addNineSuck(){
+	CurrentLine.push("-9");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+	
+	DisplayCurrentLine();
+}
+
+function addTenSpit(){
+	CurrentLine.push("10");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+
+	DisplayCurrentLine();
+}
+
+function addTenSuck(){
+	CurrentLine.push("-10");
+	CurrentBend.push(0.0);
+	CurrentExtend.push(0);
+	CurrentIdx++;
+	
+	DisplayCurrentLine();
+}
+function setBend(bVol){
+	CurrentBend[CurrentIdx-1] = bVol;
+	
+	DisplayCurrentLine();
+}
+function addKyufu(kLen){
+	
+	if(kLen == 16){
+		CurrentLine.push("16kf");
+	}else if(kLen == 8){
+		CurrentLine.push("8kf");
+	}else if(kLen == 4){
+		CurrentLine.push("4kf");
+	}else if(kLen == 2){
+		CurrentLine.push("2kf");
+	}else if(kLen == 0){
+		CurrentLine.push("zkf");
+	}
+	
+	CurrentBend.push(-1);
+	CurrentIdx++;
+	
+	DisplayCurrentLine();
+}
+
+function addExtend(){
+	if(CurrentIdx == 0){
+		return;
+	}
+	CurrentExtend[CurrentIdx-1]++;
+	
+	DisplayCurrentLine();
+}
+
+function clrExtend(){
+	if(CurrentIdx == 0){
+		return;
+	}
+	CurrentExtend[CurrentIdx-1] = 0;
+	
+	DisplayCurrentLine();
+}
+
+function DelCrOnpu(){
+	if(CurrentIdx == 0){
+		return;
+	}
+	
+	CurrentLine.pop();
+	CurrentBend.pop();
+	CurrentIdx--;
+	
+	DisplayCurrentLine();
+}
+
+function DelEndLine(){
+	if(LineCount == 0){
+		return;
+	}
+	totalLines.pop();
+	LineCount--;
+	
+	printAllPrevLines();
+}
+
+function LoadGakufuData(content){
+	var lines = content.split("\r\n");
+	var line="";
+	var outputStr;
+	var onpus;
+	var onpu;
+	var val;
+	var bdVol;
+	
+	var tempoElem = document.getElementById("TempoTextBox");
+	Tempo = parseInt(lines[0].replace("Tempo=", ""));
+	tempoElem.value = Tempo;
+	
+	
+	for(var i=1; i<lines.length; i++){
+		line = lines[i];
+		if(line == ""){
+			continue;
+		}
+		
+
+		if(line.slice(0,1) == "*"){
+			outputStr = "s";
+			outputStr += line.slice(1);
+			totalLines.push(outputStr);
+			LineCount++;
 			
-			brElem = document.createElement("br");
-			divElem.appendChild(brElem);
+		}else{
+			onpus = line.split(",");
+			outputStr = "";
+			bdVol = 0.0;
+			extdVol = 0.0;
+			
+			for(var j=0; j<onpus.length; j++){
+				onpu = onpus[j].trim();
+				
+				if(outputStr != ""){
+					outputStr += ", ";
+				}
+				
+				if(onpu.indexOf("kf") != -1){
+					outputStr += onpu;
+					continue;
+				}
+				
+				if(onpu.indexOf("bd(") != -1){
+					bdVol = onpu.slice(onpu.indexOf("bd(")+3);
+					bdVol = bdVol.slice(0, bdVol.indexOf(")"));
+					bdVol = Number(bdVol);
+					
+				}else{
+					bdVol = 0.0;
+				}
+				
+				if(onpu.indexOf("extd(") != -1){
+					extdVol = onpu.slice(onpu.indexOf("extd(")+5);
+					extdVol = extdVol.slice(0, extdVol.indexOf(")") );
+					extdVol = Number(extdVol);
+				}else{
+					extdVol = 0.0;
+				}
+				
+				val = parseInt(onpu);
+				if(val >= 1){
+					outputStr += val;
+				}else{
+					outputStr += getCorrespondStr(val);
+				}
+				
+				if(bdVol != 0){
+					outputStr += "↓";
+					outputStr += "(";
+					
+					if(bdVol == 1.0){
+						outputStr += "1.0";
+					}else{
+						outputStr += bdVol;
+					}
+					
+					outputStr += ")";
+				}
+				
+				if(extdVol != 0){
+					for(var k=0; k<extdVol; k++){
+						outputStr += "+";
+					}
+				}
+				
+				
+				
+			}
+			
+			
+			totalLines.push(outputStr);
+			LineCount++;
+			
 		}
 	}
-	
-	var btnElem = document.getElementById("SentakuOnZairyoSentakuTab");
-	btnElem.style.fontSize = "20px";
 }
 
-function ZairyoSentaku(){
-	var textElem;
+function OutputFile(){
+	var outline;
+	var content="";
+	var extdVol;
 	
-	if(g_SyuyouZairyoTuikaNumber == 1){
-		textElem = document.getElementById("Zairyo1OnRyoriTyusyutuTab");
-	}else if(g_SyuyouZairyoTuikaNumber == 2){
-		textElem = document.getElementById("Zairyo2OnRyoriTyusyutuTab");
-	}else if(g_SyuyouZairyoTuikaNumber == 3){
-		textElem = document.getElementById("Zairyo3OnRyoriTyusyutuTab");
-	}else if(g_SyuyouZairyoTuikaNumber == 4){
-		textElem = document.getElementById("Zairyo4OnRyoriTyusyutuTab");
-	}else if(g_SyuyouZairyoTuikaNumber == 5){
-		textElem = document.getElementById("Zairyo5OnRyoriTyusyutuTab");
-	}
-	textElem.value = Cr_ZairyoMei;
+	content = "Tempo=";
+	content += Tempo;
+	content += "\r\n";
 	
-	HiddenAllTab();
-	DisplayTab(TAB_RYORI_TYUSYUTU);
-	
-}
-
-function GetZairyoList(category){
-	var zairyo;
-	var resultList = [];
-	
-	for(var i=0; i<g_RyoriAndZairyo.zairyoMeiList.length; i++){
-		zairyo = g_RyoriAndZairyo.zairyoMeiList[i];
-		if(zairyo.category == category){
-			resultList.push(zairyo);
-		}else if(zairyo.subcategory == category){
-			resultList.push(zairyo);
+	for(var i=0; i<totalLines.length; i++){
+		outline = totalLines[i];
+		outline = outline.replace(/↓/g, "bd");
+		outline = outline.replace(/①/g, "-1");
+		outline = outline.replace(/②/g, "-2");
+		outline = outline.replace(/③/g, "-3");
+		outline = outline.replace(/④/g, "-4");
+		outline = outline.replace(/⑤/g, "-5");
+		outline = outline.replace(/⑥/g, "-6");
+		outline = outline.replace(/⑦/g, "-7");
+		outline = outline.replace(/⑧/g, "-8");
+		outline = outline.replace(/⑨/g, "-9");
+		outline = outline.replace(/⑩/g, "-10");
+		
+		
+		while(outline.indexOf("+") != -1){
+			extdVol = 1;
+			idx1 = outline.indexOf("+");
+			for(var k=idx1+1; k<outline.length; k++){
+				if(outline.charAt(k) != '+'){
+					break;
+				}
+				extdVol++;
+			}
+			front = outline.slice(0, idx1);
+			back = outline.slice(k);
+			
+			outline = front;
+			outline += "extd(";
+			outline += extdVol;
+			outline += ")";
+			outline += back;
 		}
+		
+		
+		content += outline;
+		content += "\r\n";
+		
 	}
-	return resultList;
-}
-function Test1(){
-	var category;
-	var subcategory="";
-	var zairyoMei;
-	var zairyo;
 	
-	
-	category = "野菜";
-	zairyoMei = "キャベツ";
-	zairyo = new Zairyo(category, zairyoMei, subcategory);	
-	g_ZairyoList.push(zairyo);
-
-	category = "野菜";
-	zairyoMei = "トマト";
-	zairyo = new Zairyo(category, zairyoMei, subcategory);	
-	g_ZairyoList.push(zairyo);
-	
-	category = "野菜";
-	zairyoMei = "レタス";
-	zairyo = new Zairyo(category, zairyoMei, subcategory);	
-	g_ZairyoList.push(zairyo);
-	
-	category = "野菜";
-	zairyoMei = "ナス";
-	zairyo = new Zairyo(category, zairyoMei, subcategory);	
-	g_ZairyoList.push(zairyo);
-	
-	category = "野菜";
-	zairyoMei = "ニンジン";
-	zairyo = new Zairyo(category, zairyoMei, subcategory);	
-	g_ZairyoList.push(zairyo);
-	
-	category = "野菜";
-	zairyoMei = "セロリ";
-	zairyo = new Zairyo(category, zairyoMei, subcategory);	
-	g_ZairyoList.push(zairyo);
-	
-	category = "魚";	
-	zairyoMei = "サンマ";
-	zairyo = new Zairyo(category, zairyoMei, subcategory);	
-	g_ZairyoList.push(zairyo);
-	
-	category = "肉";	
-	zairyoMei = "鶏肉";
-	zairyo = new Zairyo(category, zairyoMei, subcategory);	
-	g_ZairyoList.push(zairyo);
-	
-	category = "調味料";	
-	zairyoMei = "唐辛子";
-	zairyo = new Zairyo(category, zairyoMei, subcategory);	
-	g_ZairyoList.push(zairyo);
+	let blob = new Blob([content],{type:"text/plan"});
+	let link = document.createElement('a');
+	link.href = URL.createObjectURL(blob);
+	link.download = '10hpGakufu.txt';
+	link.click();
 }
 
-function AddZairyoCategory(category){
-	var newFlg = true;
-	for(var i=0; i<g_ZairyoCategoryList.length; i++){
-		if(g_ZairyoCategoryList[i] == category){
-			newFlg = false;
-			break;
-		}
-	}
-	
-	if(newFlg == true){
-		g_ZairyoCategoryList.push(category);
-	}
-}
 function ImportDataOnDataImportTab(){
       var fileRef = document.getElementById('fileOnDataImportTab');
 	  var content;
-	  var category1;
-	  var subcategory1;
 	  
       if (1 <= fileRef.files.length) {
 			var reader = new FileReader();
 			//ファイル読み出し完了後の処理を記述
 			reader.onload = function (theFile) {
 			var content = theFile.target.result;
-			g_RyoriAndZairyo = JSON.parse(content);
-			for(var i=0; i<g_RyoriAndZairyo.zairyoMeiList.length; i++){
-				category1 =  g_RyoriAndZairyo.zairyoMeiList[i].category;
-				subcategory1 = g_RyoriAndZairyo.zairyoMeiList[i].subcategory;
-				
-				if(!g_ZairyoCategoryList.includes(category1)){
-					g_ZairyoCategoryList.push(category1);
-				}
-				
-				if(subcategory1 != "" && !g_ZairyoCategoryList.includes(subcategory1)){
-					g_ZairyoCategoryList.push(subcategory1);
-				}
-			}
-			Cr_ZairyoCategory = g_ZairyoCategoryList[0];
-			DataImportFlg = true;
-			DisplayDataImportTab();
+			LoadGakufuData(content);
+			
+			printAllPrevLines();
+			ClearCurrentLine();
         }
 
 		//ファイル読み出し
@@ -416,175 +751,6 @@ function ImportDataOnDataImportTab(){
 
       }
 }
-
-var g_reader = new FileReader();
-var g_File;
-var fileElem = document.getElementById("fileOnDataImportExportTab");
-fileElem.onchange = function(event) {
-    g_File = event.target.files[0];
-};
-
-function SearchRyori(searchZairyoList, keyword){
-	var useFlg;
-	var resultList = [];
-	var ryori, zairyoList1;
-	var useZairyo;
-	
-loop1: for(var i=0; i<g_RyoriAndZairyo.ryoriList.length; i++){
-		ryori = g_RyoriAndZairyo.ryoriList[i];
-		
-		zairyoList1 = ryori.zairyoList;
-loop2:	for(var j=0; j<searchZairyoList.length; j++){
-			useFlg = false;
-			for(var k=0; k<zairyoList1.length; k++){
-				if(zairyoList1[k] == searchZairyoList[j]){
-					useFlg = true;
-					break;
-				}
-			}
-			if(useFlg == false){
-				continue loop1;
-			}
-		}
-		if(keyword == "" || ryori.bikou.indexOf(keyword) != -1){
-			resultList.push(ryori);
-		}
-	}
-	
-	return resultList;
-}
-
-function RyoriTyusyutuOnRyoriTyusyutuTab(){
-	var zairyoList = [];
-	var keyword;
-	var zairyo;
-	var ryoriList1;
-	
-	textElem = document.getElementById("KeyWordOnRyoriTyusyutuTab");
-	keyword = textElem.value;
-	
-	textElem = document.getElementById("Zairyo1OnRyoriTyusyutuTab");
-	zairyo = textElem.value;
-	if(zairyo != ""){
-		zairyoList.push(zairyo);
-	}
-
-	textElem = document.getElementById("Zairyo2OnRyoriTyusyutuTab");
-	zairyo = textElem.value;
-	if(zairyo != ""){
-		zairyoList.push(zairyo);
-	}
-	
-	textElem = document.getElementById("Zairyo3OnRyoriTyusyutuTab");
-	zairyo = textElem.value;
-	if(zairyo != ""){
-		zairyoList.push(zairyo);
-	}
-	
-	textElem = document.getElementById("Zairyo4OnRyoriTyusyutuTab");
-	zairyo = textElem.value;
-	if(zairyo != ""){
-		zairyoList.push(zairyo);
-	}
-
-	textElem = document.getElementById("Zairyo5OnRyoriTyusyutuTab");
-	zairyo = textElem.value;
-	if(zairyo != ""){
-		zairyoList.push(zairyo);
-	}
-
-	ryoriList = SearchRyori(zairyoList, keyword);
-	
-	var spanElem = document.getElementById("HitCountOnRyoriTyusyutuTab");
-	spanElem.innerHTML = ryoriList.length;
-	
-	// 0~ryoriList.length;
-	var random1 = Math.floor(Math.random() * ryoriList.length);
-	DisplayRyoriDiv(ryoriList[random1]);
-}
-function DisplayRyoriDiv(ryori){
-	var divElem;
-	var spanElem;
-	var brElem;
-	var hrefElem;
-	
-	
-	divElem = document.getElementById("RyoriDivOnTyusyutuBtnOnRyoriTyusyutuTab");
-	//カテゴリーのDivをクリア
-	while(divElem.firstChild != null){ divElem.removeChild(divElem.firstChild); }
-	
-	spanElem = document.createElement("span");
-	spanElem.innerHTML = "料理名:";
-	spanElem.innerHTML += ryori.ryoriMei;
-	divElem.appendChild(spanElem);
-	
-	brElem = document.createElement("br");
-	divElem.appendChild(brElem);
-	
-	spanElem = document.createElement("span");
-	spanElem.innerHTML = "主要材料:";
-	for(var i=0; i<ryori.zairyoList.length; i++){
-		if(i != 0){
-			spanElem.innerHTML += ",　";
-		}
-		spanElem.innerHTML += ryori.zairyoList[i];
-	}
-	divElem.appendChild(spanElem);
-	
-	brElem = document.createElement("br");
-	divElem.appendChild(brElem);
-	
-	spanElem = document.createElement("span");
-	spanElem.innerHTML = "レシピURL:";
-	divElem.appendChild(spanElem);
-	
-	hrefElem = document.createElement("a");
-	hrefElem.href = ryori.recipeURL;
-	hrefElem.innerHTML = ryori.recipeURL;
-	hrefElem.target = "_blank";
-	divElem.appendChild(hrefElem);
-	
-	brElem = document.createElement("br");
-	divElem.appendChild(brElem);
-	
-	spanElem = document.createElement("span");
-	spanElem.innerHTML = "所要時間:";
-	spanElem.innerHTML += ryori.syoyouJikan;
-	spanElem.innerHTML += "分";
-	divElem.appendChild(spanElem);
-	
-	brElem = document.createElement("br");
-	divElem.appendChild(brElem);
-	
-	spanElem = document.createElement("span");
-	spanElem.innerHTML = "備考:";
-	spanElem.innerHTML += ryori.bikou;
-	divElem.appendChild(spanElem);
-	
-	brElem = document.createElement("br");
-	divElem.appendChild(brElem);
-}
-
-
-//材料のコンストラクタ
-function Zairyo(category, zairyoMei, subcategory){
-	this.category = category;
-	this.zairyoMei = zairyoMei;
-	this.subcategory = subcategory;
-	
-	AddZairyoCategory(category);
-	if(subcategory != ""){
-		AddZairyoCategory(subcategory);
-	}
-}
-//料理のコンストラクタ
-function Ryori(ryoriMei, zairyoMeiList, recipeURL, syoyouJikan, bikou){
-	this.ryoriMei = ryoriMei;
-	this.zairyoMeiList = zairyoMeiList;
-	this.recipeURL = recipeURL;
-	this.syoyouJikan = syoyouJikan;
-	this.bikou = bikou;
-} 
 </script>
 
 

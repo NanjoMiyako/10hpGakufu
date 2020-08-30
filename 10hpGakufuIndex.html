@@ -10,6 +10,7 @@
 <script src="jquery-3.3.1.min.js"></script>
 
 
+<!--
 <form id="form1" name="form1">
 <select name="tabPages" style="font-size:20px; border:1px solid;">
 	<option value="tab_GakufuSakusei">楽譜作成</option>
@@ -17,55 +18,10 @@
 </select>
 <button type="button" id="selectTabPage1", style="margin-left:10px;" onclick="ChangeTab()">タブを選択</button>
 </form>
+-->
 
 <!-- 楽譜作成 -->
 <div id="tab_GakufuSakusei" class="tab">
-楽譜作成<br>
-今まで作成した楽譜<br>
-現在の段:<br>
-<div id="CurrentLine"></div>
-
-<div class="kugiri"></div>
-<div class="myBtn" onclick="addOneSpit()">1</div>
-<div class="myBtn">2</div>
-<div class="myBtn">3</div>
-<div class="myBtn">4</div>
-<div class="myBtn">5</div>
-<div class="myBtn">6</div>
-<div class="myBtn">7</div>
-<div class="myBtn">8</div>
-<div class="myBtn">9</div>
-<div class="myBtn">10</div>
-<br>
-
-<div class="kugiri"></div>
-<hr>
-<div class="myBtn" onclick="addOneSuck()">①</div>
-<div class="myBtn">②</div>
-<div class="myBtn">③</div>
-<div class="myBtn">④</div>
-<div class="myBtn">⑤</div>
-<div class="myBtn">⑥</div>
-<div class="myBtn">⑦</div>
-<div class="myBtn">⑧</div>
-<div class="myBtn">⑨</div>
-<div class="myBtn">⑩</div>
-<br>
-
-<div class="kugiri"></div>
-<hr>
-<div class="myBtn2">ベンド0.5</div>
-<div class="myBtn2">ベンド1.0</div>
-<div class="myBtn2">ベンド1.5</div>
-<div class="myBtn2">ベンド解除</div>
-
-<div class="kugiri"></div>
-<hr>
-<div class="myBtn2">現在の行を登録</div>
-
-</div>
-
-<div id="tab_DataImport" class="tab">
 楽譜データ読み込み<br>
 <span id="ImportDataFlgOnDataImportTab"></span><br>
 インポートファイルを選択:<br>
@@ -73,6 +29,86 @@
 <button type="button" id="ImportDataOnDataImportTab" style="margin-top:10px;" onclick="ImportDataOnDataImportTab()">
 楽譜データををインポート
 </button><br>
+<hr>
+楽譜作成<br>
+今まで作成した楽譜<br>
+<div id="prevLines"></div>
+<br>
+<hr>
+現在の段:<br>
+<div id="CurrentLine"></div>
+
+<div class="kugiri"></div>
+tempo=<input type="text" id="TempoTextBox" value="100"><br>
+<button onclick="setTempo()">テンポを設定</button>
+<hr>
+
+<div class="kugiri"></div>
+行番号=<input type="text" id="CpyLineNumTextBox" value=""><br>
+<button onclick="CpyLineNum()">行をコピー</button>
+<hr>
+
+<div class="kugiri"></div>
+<div class="myBtn" onclick="addOneSpit()">1</div>
+<div class="myBtn" onclick="addTwoSpit()">2</div>
+<div class="myBtn" onclick="addThreeSpit()">3</div>
+<div class="myBtn" onclick="addFourSpit()">4</div>
+<div class="myBtn" onclick="addFiveSpit()">5</div>
+<div class="myBtn" onclick="addSixSpit()">6</div>
+<div class="myBtn" onclick="addSevenSpit()">7</div>
+<div class="myBtn" onclick="addEightSpit()">8</div>
+<div class="myBtn" onclick="addNineSpit()">9</div>
+<div class="myBtn" onclick="addTenSpit()">10</div>
+<br>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn" onclick="addOneSuck()">①</div>
+<div class="myBtn" onclick="addTwoSuck()">②</div>
+<div class="myBtn" onclick="addThreeSuck()">③</div>
+<div class="myBtn" onclick="addFourSuck()">④</div>
+<div class="myBtn" onclick="addFiveSuck()">⑤</div>
+<div class="myBtn" onclick="addSixSuck()">⑥</div>
+<div class="myBtn" onclick="addSevenSuck()">⑦</div>
+<div class="myBtn" onclick="addEightSuck()">⑧</div>
+<div class="myBtn" onclick="addNineSuck()">⑨</div>
+<div class="myBtn" onclick="addTenSuck()">⑩</div>
+<br>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn2" onclick="setBend(0.5)">ベンド0.5</div>
+<div class="myBtn2" onclick="setBend(1.0)">ベンド1.0</div>
+<div class="myBtn2" onclick="setBend(1.5)">ベンド1.5</div>
+<div class="myBtn2" onclick="setBend(0.0)">ベンド解除</div>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn2" onclick="addKyufu(0)">全休符</div>
+<div class="myBtn2" onclick="addKyufu(2)">2分休符</div>
+<div class="myBtn2" onclick="addKyufu(4)">4分休符</div>
+<div class="myBtn2" onclick="addKyufu(8)">8分休符</div>
+<div class="myBtn2" onclick="addKyufu(16)">16分休符</div>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn2" onclick="addExtend()">伸ばす記号追加</div>
+<div class="myBtn2" onclick="clrExtend()">伸ばす記号クリア</div>
+
+<div class="kugiri"></div>
+<hr>
+<div class="myBtn3" onclick="DelCrOnpu()">現在の音符(末尾)を削除</div>
+<div class="kugiri"></div>
+
+<div class="myBtn2" onclick="RegistCurrentLine()">現在の行を登録</div>
+<div class="kugiri"></div>
+
+<div class="myBtn2" onclick="DelEndLine()">末尾の行を削除</div>
+<div class="kugiri"></div>
+<hr>
+
+<div class="myBtn3" onclick="OutputFile()">現在の楽譜データをファイル出力</div>
+<div class="kugiri"></div>
 </div>
 
 
